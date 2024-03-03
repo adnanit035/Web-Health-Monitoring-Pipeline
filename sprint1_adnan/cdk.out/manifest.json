@@ -1,0 +1,154 @@
+{
+  "version": "16.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "Sprint1AdnanStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "Sprint1AdnanStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "Sprint1AdnanStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "Sprint1AdnanStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1551e9b13bf038abde2263e1cd93e6d306f0542838e2b7e79e5e8b7029992273.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "Sprint1AdnanStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "Sprint1AdnanStack.assets"
+      ],
+      "metadata": {
+        "/Sprint1AdnanStack/CWRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CWRole7EC94C1E"
+          }
+        ],
+        "/Sprint1AdnanStack/AdnanWHLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHLambdaD0006558"
+          }
+        ],
+        "/Sprint1AdnanStack/AdnanWHRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHRuleC47D278B"
+          }
+        ],
+        "/Sprint1AdnanStack/AdnanWHRule/AllowEventRuleSprint1AdnanStackAdnanWHLambda938E5EDA": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHRuleAllowEventRuleSprint1AdnanStackAdnanWHLambda938E5EDAAB3816ED"
+          }
+        ],
+        "/Sprint1AdnanStack/AdnanWHTopic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHTopicD9608C42"
+          }
+        ],
+        "/Sprint1AdnanStack/AdnanWHTopic/adnan.irshad.skipq@gmail.com/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHTopicadnanirshadskipqgmailcom397E22F2"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Availability-Alarm_https:----www.skipq.org--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwskipqorgFF01DF68"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Latency-Alarm_https:----www.skipq.org--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwskipqorgD5E9753F"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Availability-Alarm_https:----www.youtube.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwyoutubecomD986CFF3"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Latency-Alarm_https:----www.youtube.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwyoutubecomA944DADA"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Availability-Alarm_https:----www.netflix.com--pk--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwnetflixcompk84C5CC9B"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Latency-Alarm_https:----www.netflix.com--pk--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwnetflixcompkA13AFD9B"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Availability-Alarm_https:----www.amazon.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwamazoncom59EE0418"
+          }
+        ],
+        "/Sprint1AdnanStack/AI-Latency-Alarm_https:----www.amazon.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwamazoncom382968DB"
+          }
+        ],
+        "/Sprint1AdnanStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/Sprint1AdnanStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/Sprint1AdnanStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/Sprint1AdnanStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "Sprint1AdnanStack"
+    }
+  }
+}

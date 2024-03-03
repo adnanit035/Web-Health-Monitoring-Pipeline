@@ -1,0 +1,1260 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.101"
+        }
+      },
+      "Sprint2AdnanStack": {
+        "id": "Sprint2AdnanStack",
+        "path": "Sprint2AdnanStack",
+        "children": {
+          "CWRole": {
+            "id": "CWRole",
+            "path": "Sprint2AdnanStack/CWRole",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/CWRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "lambda.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "This is cloudwatch access role",
+                    "managedPolicyArns": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":iam::aws:policy/CloudWatchFullAccess"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.16.0"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "Sprint2AdnanStack/CWRole/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Sprint2AdnanStack/CWRole/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "s3:GetObject*",
+                                "s3:GetBucket*",
+                                "s3:List*",
+                                "s3:DeleteObject*",
+                                "s3:PutObject",
+                                "s3:PutObjectLegalHold",
+                                "s3:PutObjectRetention",
+                                "s3:PutObjectTagging",
+                                "s3:PutObjectVersionTagging",
+                                "s3:Abort*"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                {
+                                  "Fn::GetAtt": [
+                                    "AdnanConstantsFileBucket9E895049",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "AdnanConstantsFileBucket9E895049",
+                                          "Arn"
+                                        ]
+                                      },
+                                      "/*"
+                                    ]
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "CWRoleDefaultPolicy99B4CE36",
+                        "roles": [
+                          {
+                            "Ref": "CWRole7EC94C1E"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.16.0"
+            }
+          },
+          "AdnanWHLambda": {
+            "id": "AdnanWHLambda",
+            "path": "Sprint2AdnanStack/AdnanWHLambda",
+            "children": {
+              "Code": {
+                "id": "Code",
+                "path": "Sprint2AdnanStack/AdnanWHLambda/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Sprint2AdnanStack/AdnanWHLambda/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.16.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Sprint2AdnanStack/AdnanWHLambda/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.16.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AdnanWHLambda/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "56c19f3b5222a7cdb15f5221a20b79532e482c25604941943c77237701ee9e75.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CWRole7EC94C1E",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "web_health_checker_lambda.lambda_handler",
+                    "runtime": "python3.6",
+                    "timeout": 60
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.16.0"
+            }
+          },
+          "AdnanWHRule": {
+            "id": "AdnanWHRule",
+            "path": "Sprint2AdnanStack/AdnanWHRule",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AdnanWHRule/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "This my WH rule that triggers lambda after every 1 minute.",
+                    "scheduleExpression": "rate(1 minute)",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "AdnanWHLambdaD0006558",
+                            "Arn"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_events.CfnRule",
+                  "version": "2.16.0"
+                }
+              },
+              "AllowEventRuleSprint2AdnanStackAdnanWHLambdaFBA22269": {
+                "id": "AllowEventRuleSprint2AdnanStackAdnanWHLambdaFBA22269",
+                "path": "Sprint2AdnanStack/AdnanWHRule/AllowEventRuleSprint2AdnanStackAdnanWHLambdaFBA22269",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "AdnanWHLambdaD0006558",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "events.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "AdnanWHRuleC47D278B",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_events.Rule",
+              "version": "2.16.0"
+            }
+          },
+          "AdnanWHTopic": {
+            "id": "AdnanWHTopic",
+            "path": "Sprint2AdnanStack/AdnanWHTopic",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AdnanWHTopic/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SNS::Topic",
+                  "aws:cdk:cloudformation:props": {
+                    "displayName": "Web-Health"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_sns.CfnTopic",
+                  "version": "2.16.0"
+                }
+              },
+              "adnan.irshad.skipq@gmail.com": {
+                "id": "adnan.irshad.skipq@gmail.com",
+                "path": "Sprint2AdnanStack/AdnanWHTopic/adnan.irshad.skipq@gmail.com",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Sprint2AdnanStack/AdnanWHTopic/adnan.irshad.skipq@gmail.com/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SNS::Subscription",
+                      "aws:cdk:cloudformation:props": {
+                        "protocol": "email",
+                        "topicArn": {
+                          "Ref": "AdnanWHTopicD9608C42"
+                        },
+                        "endpoint": "adnan.irshad.skipq@gmail.com"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_sns.CfnSubscription",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_sns.Subscription",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_sns.Topic",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Availability-Alarm_https:----www.skipq.org--": {
+            "id": "AI-Availability-Alarm_https:----www.skipq.org--",
+            "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.skipq.org--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.skipq.org--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "LessThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.skipq.org/"
+                      }
+                    ],
+                    "metricName": "Availability_https://www.skipq.org/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 1
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Latency-Alarm_https:----www.skipq.org--": {
+            "id": "AI-Latency-Alarm_https:----www.skipq.org--",
+            "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.skipq.org--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.skipq.org--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "GreaterThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.skipq.org/"
+                      }
+                    ],
+                    "metricName": "Latency_https://www.skipq.org/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 0.3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Availability-Alarm_https:----www.youtube.com--": {
+            "id": "AI-Availability-Alarm_https:----www.youtube.com--",
+            "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.youtube.com--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.youtube.com--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "LessThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.youtube.com/"
+                      }
+                    ],
+                    "metricName": "Availability_https://www.youtube.com/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 1
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Latency-Alarm_https:----www.youtube.com--": {
+            "id": "AI-Latency-Alarm_https:----www.youtube.com--",
+            "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.youtube.com--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.youtube.com--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "GreaterThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.youtube.com/"
+                      }
+                    ],
+                    "metricName": "Latency_https://www.youtube.com/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 0.3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Availability-Alarm_https:----www.netflix.com--pk--": {
+            "id": "AI-Availability-Alarm_https:----www.netflix.com--pk--",
+            "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.netflix.com--pk--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.netflix.com--pk--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "LessThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.netflix.com/pk/"
+                      }
+                    ],
+                    "metricName": "Availability_https://www.netflix.com/pk/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 1
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Latency-Alarm_https:----www.netflix.com--pk--": {
+            "id": "AI-Latency-Alarm_https:----www.netflix.com--pk--",
+            "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.netflix.com--pk--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.netflix.com--pk--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "GreaterThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.netflix.com/pk/"
+                      }
+                    ],
+                    "metricName": "Latency_https://www.netflix.com/pk/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 0.3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Availability-Alarm_https:----www.amazon.com--": {
+            "id": "AI-Availability-Alarm_https:----www.amazon.com--",
+            "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.amazon.com--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Availability-Alarm_https:----www.amazon.com--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "LessThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.amazon.com/"
+                      }
+                    ],
+                    "metricName": "Availability_https://www.amazon.com/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 1
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "AI-Latency-Alarm_https:----www.amazon.com--": {
+            "id": "AI-Latency-Alarm_https:----www.amazon.com--",
+            "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.amazon.com--",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/AI-Latency-Alarm_https:----www.amazon.com--/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "comparisonOperator": "GreaterThanThreshold",
+                    "evaluationPeriods": 1,
+                    "alarmActions": [
+                      {
+                        "Ref": "AdnanWHTopicD9608C42"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "URL",
+                        "value": "https://www.amazon.com/"
+                      }
+                    ],
+                    "metricName": "Latency_https://www.amazon.com/",
+                    "namespace": "AdnanOrion",
+                    "period": 60,
+                    "statistic": "Average",
+                    "threshold": 0.3
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.16.0"
+            }
+          },
+          "Adnan-ConstantsFileBucket": {
+            "id": "Adnan-ConstantsFileBucket",
+            "path": "Sprint2AdnanStack/Adnan-ConstantsFileBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/Adnan-ConstantsFileBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "aws-cdk:auto-delete-objects",
+                        "value": "true"
+                      },
+                      {
+                        "key": "aws-cdk:cr-owned:5be2c644",
+                        "value": "true"
+                      }
+                    ],
+                    "versioningConfiguration": {
+                      "status": "Enabled"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.16.0"
+                }
+              },
+              "Policy": {
+                "id": "Policy",
+                "path": "Sprint2AdnanStack/Adnan-ConstantsFileBucket/Policy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Sprint2AdnanStack/Adnan-ConstantsFileBucket/Policy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                      "aws:cdk:cloudformation:props": {
+                        "bucket": {
+                          "Ref": "AdnanConstantsFileBucket9E895049"
+                        },
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "s3:GetObject",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": "*"
+                              },
+                              "Resource": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "AdnanConstantsFileBucket9E895049",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "/*"
+                                  ]
+                                ]
+                              }
+                            },
+                            {
+                              "Action": [
+                                "s3:GetBucket*",
+                                "s3:List*",
+                                "s3:DeleteObject*"
+                              ],
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": {
+                                  "Fn::GetAtt": [
+                                    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                                    "Arn"
+                                  ]
+                                }
+                              },
+                              "Resource": [
+                                {
+                                  "Fn::GetAtt": [
+                                    "AdnanConstantsFileBucket9E895049",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "AdnanConstantsFileBucket9E895049",
+                                          "Arn"
+                                        ]
+                                      },
+                                      "/*"
+                                    ]
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Action": "s3:GetObject",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":root"
+                                    ]
+                                  ]
+                                }
+                              },
+                              "Resource": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "AdnanConstantsFileBucket9E895049",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "/constants.py"
+                                  ]
+                                ]
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                  "version": "2.16.0"
+                }
+              },
+              "AutoDeleteObjectsCustomResource": {
+                "id": "AutoDeleteObjectsCustomResource",
+                "path": "Sprint2AdnanStack/Adnan-ConstantsFileBucket/AutoDeleteObjectsCustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "Sprint2AdnanStack/Adnan-ConstantsFileBucket/AutoDeleteObjectsCustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.16.0"
+            }
+          },
+          "Custom::S3AutoDeleteObjectsCustomResourceProvider": {
+            "id": "Custom::S3AutoDeleteObjectsCustomResourceProvider",
+            "path": "Sprint2AdnanStack/Custom::S3AutoDeleteObjectsCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "Sprint2AdnanStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.16.0"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "Sprint2AdnanStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.16.0"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "Sprint2AdnanStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProvider",
+              "version": "2.16.0"
+            }
+          },
+          "Adnan-ConstantsBucketDeploy": {
+            "id": "Adnan-ConstantsBucketDeploy",
+            "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy",
+            "children": {
+              "AwsCliLayer": {
+                "id": "AwsCliLayer",
+                "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/AwsCliLayer",
+                "children": {
+                  "Code": {
+                    "id": "Code",
+                    "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/AwsCliLayer/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/AwsCliLayer/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.16.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/AwsCliLayer/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.16.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.16.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/AwsCliLayer/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
+                      "aws:cdk:cloudformation:props": {
+                        "content": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "61f3b82f5fe3b135f58644b9bb25da9af6d46345bbe50c3d935682beae71ef17.zip"
+                        },
+                        "description": "/opt/awscli/aws"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnLayerVersion",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.lambda_layer_awscli.AwsCliLayer",
+                  "version": "2.16.0"
+                }
+              },
+              "CustomResourceHandler": {
+                "id": "CustomResourceHandler",
+                "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/CustomResourceHandler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.SingletonFunction",
+                  "version": "2.16.0"
+                }
+              },
+              "Asset1": {
+                "id": "Asset1",
+                "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/Asset1",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/Asset1/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.16.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/Asset1/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.16.0"
+                }
+              },
+              "CustomResource": {
+                "id": "CustomResource",
+                "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/CustomResource",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/CustomResource/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3_deployment.BucketDeployment",
+              "version": "2.16.0"
+            }
+          },
+          "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": {
+            "id": "Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
+            "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.16.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "s3:GetObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":s3:::",
+                                          {
+                                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                                          }
+                                        ]
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":s3:::",
+                                          {
+                                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": [
+                                    "s3:GetObject*",
+                                    "s3:GetBucket*",
+                                    "s3:List*",
+                                    "s3:DeleteObject*",
+                                    "s3:PutObject",
+                                    "s3:PutObjectLegalHold",
+                                    "s3:PutObjectRetention",
+                                    "s3:PutObjectTagging",
+                                    "s3:PutObjectVersionTagging",
+                                    "s3:Abort*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "AdnanConstantsFileBucket9E895049",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "AdnanConstantsFileBucket9E895049",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+                            "roles": [
+                              {
+                                "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.16.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.16.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.16.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.16.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.16.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "f98b78092dcdd31f5e6d47489beb5f804d4835ef86a8085d0a2053cb9ae711da.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "index.handler",
+                    "layers": [
+                      {
+                        "Ref": "AdnanConstantsBucketDeployAwsCliLayerE9C65438"
+                      }
+                    ],
+                    "runtime": "python3.7",
+                    "timeout": 900
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.16.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "Sprint2AdnanStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "Sprint2AdnanStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.16.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "Sprint2AdnanStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.16.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.101"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.16.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.16.0"
+    }
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "version": "16.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "Sprint2AdnanStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "Sprint2AdnanStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "Sprint2AdnanStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "Sprint2AdnanStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/80b669264a56b866556d85746857ef8e4595827f4737cf4e21303f46c6493f0f.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "Sprint2AdnanStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "Sprint2AdnanStack.assets"
+      ],
+      "metadata": {
+        "/Sprint2AdnanStack/CWRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CWRole7EC94C1E"
+          }
+        ],
+        "/Sprint2AdnanStack/CWRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CWRoleDefaultPolicy99B4CE36"
+          }
+        ],
+        "/Sprint2AdnanStack/AdnanWHLambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHLambdaD0006558"
+          }
+        ],
+        "/Sprint2AdnanStack/AdnanWHRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHRuleC47D278B"
+          }
+        ],
+        "/Sprint2AdnanStack/AdnanWHRule/AllowEventRuleSprint2AdnanStackAdnanWHLambdaFBA22269": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHRuleAllowEventRuleSprint2AdnanStackAdnanWHLambdaFBA22269ECD6A80F"
+          }
+        ],
+        "/Sprint2AdnanStack/AdnanWHTopic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHTopicD9608C42"
+          }
+        ],
+        "/Sprint2AdnanStack/AdnanWHTopic/adnan.irshad.skipq@gmail.com/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanWHTopicadnanirshadskipqgmailcom397E22F2"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Availability-Alarm_https:----www.skipq.org--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwskipqorgFF01DF68"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Latency-Alarm_https:----www.skipq.org--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwskipqorgD5E9753F"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Availability-Alarm_https:----www.youtube.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwyoutubecomD986CFF3"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Latency-Alarm_https:----www.youtube.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwyoutubecomA944DADA"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Availability-Alarm_https:----www.netflix.com--pk--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwnetflixcompk84C5CC9B"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Latency-Alarm_https:----www.netflix.com--pk--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwnetflixcompkA13AFD9B"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Availability-Alarm_https:----www.amazon.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIAvailabilityAlarmhttpswwwamazoncom59EE0418"
+          }
+        ],
+        "/Sprint2AdnanStack/AI-Latency-Alarm_https:----www.amazon.com--/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AILatencyAlarmhttpswwwamazoncom382968DB"
+          }
+        ],
+        "/Sprint2AdnanStack/Adnan-ConstantsFileBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanConstantsFileBucket9E895049"
+          }
+        ],
+        "/Sprint2AdnanStack/Adnan-ConstantsFileBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanConstantsFileBucketPolicyAD22731E"
+          }
+        ],
+        "/Sprint2AdnanStack/Adnan-ConstantsFileBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanConstantsFileBucketAutoDeleteObjectsCustomResourceC7F18DCB"
+          }
+        ],
+        "/Sprint2AdnanStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/Sprint2AdnanStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanConstantsBucketDeployAwsCliLayerE9C65438"
+          }
+        ],
+        "/Sprint2AdnanStack/Adnan-ConstantsBucketDeploy/CustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AdnanConstantsBucketDeployCustomResource85BB5A2D"
+          }
+        ],
+        "/Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+          }
+        ],
+        "/Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+          }
+        ],
+        "/Sprint2AdnanStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+          }
+        ],
+        "/Sprint2AdnanStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/Sprint2AdnanStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/Sprint2AdnanStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/Sprint2AdnanStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "Sprint2AdnanStack"
+    }
+  }
+}

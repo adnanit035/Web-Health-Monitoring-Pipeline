@@ -1,0 +1,29 @@
+- config:
+    - testset: "AWS API GATEWAY Tests"
+    - timeout: 100  # Increase timeout from the default 10 seconds
+- test:
+    - name: "health-get"
+    - url: "/prod/health"
+    - method: "GET"
+- test:
+    - name: "urls-get"
+    - url: "/prod/URLS"
+    - method: "GET"
+- test:
+    - name: "urls-post"
+    - url: "/prod/URLS"
+    - method: "POST"
+    - body: '{"URL_ID": "b21a226b-f7a4-44c9-8cb5sa-a5312350711d", "website": "https://www.adnanit.dev/"}'
+    - headers: { Content-Type: application/json }
+- test:
+    - name: "urls-patch"
+    - url: "/prod/URLS"
+    - method: "PATCH"
+    - body: '{"URL_ID": "b21a226b-f7a4-44c9-8cb5sa-a5312350711d", "website": "https://www.adnanit.dev/"}'
+    - headers: { Content-Type: application/json }
+- test:
+    - name: "urls-delete"
+    - url: "/prod/URLS"
+    - method: "DELETE"
+    - body: '{"URL_ID": "b21a226b-f7a4-44c9-8cb5sa-a5312350711d"}'
+    - headers: { Content-Type: application/json }
